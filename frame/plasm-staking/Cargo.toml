@@ -63,6 +63,7 @@ version = "3.0.0"
 version = "1.1.0"
 
 [dependencies.pallet-plasm-staking-rewards]
+default-features = false 
 path = "../plasm-staking-rewards"
 
 [features]

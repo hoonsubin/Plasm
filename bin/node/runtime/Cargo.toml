@@ -72,9 +72,7 @@ pallet-elections-phragmen = {default-features = false, version = '3.0.0'}
 pallet-im-online = {default-features = false, version = '3.0.0'}
 pallet-offences = {default-features = false, version = '3.0.0'}
 pallet-session = {default-features = false, version = '3.0.0'}
-pallet-staking = {default-features = false, version = '3.0.0'}
-pallet-staking-reward-curve = { version = "3.0.0", default-features = false}
-#pallet-plasm-staking = { path = "../../../frame/plasm-staking", default-features = false }
+pallet-plasm-staking = { path = "../../../frame/plasm-staking", default-features = false }
 pallet-plasm-staking-rewards = { path = "../../../frame/plasm-staking-rewards", default-features = false }
 pallet-treasury = {default-features = false, version = '3.0.0'}
 pallet-bounties = {default-features = false, version = '3.0.0'}
@@ -143,10 +141,9 @@ std = [
     "pallet-offences/std",
 #    "pallet-ovm/std",
     "pallet-collective/std",
-    "pallet-staking/std",
+    "pallet-plasm-staking/std",
     "pallet-plasm-staking-rewards/std",
     "pallet-treasury/std",
     "pallet-bounties/std",
-    "pallet-tips/std",
-
+    "pallet-tips/std"
 ]

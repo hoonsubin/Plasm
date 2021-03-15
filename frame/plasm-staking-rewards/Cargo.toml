@@ -44,4 +44,7 @@ std = [
     "frame-system/std",
     "pallet-staking/std",
     "sp-staking/std",
+    "pallet-balances/std",
+    "pallet-timestamp/std",
+    "pallet-randomness-collective-flip/std"
 ]

@@ -78,6 +78,7 @@ pub fn wasm_binary_unwrap() -> &'static [u8] {
 						production chains. Please rebuild with the flag disabled.")
 }
 
+
 /// Runtime version.
 pub const VERSION: RuntimeVersion = RuntimeVersion {
     spec_name: create_runtime_str!("dusty3"),
@@ -283,8 +284,8 @@ impl pallet_session::Config for Runtime {
 }
 
 impl pallet_session::historical::Config for Runtime {
-	type FullIdentification = pallet_staking::Exposure<AccountId, Balance>;
-	type FullIdentificationOf = pallet_staking::ExposureOf<Runtime>;
+	type FullIdentification = pallet_plasm_staking::Exposure<AccountId, Balance>;
+	type FullIdentificationOf = pallet_plasm_staking::ExposureOf<Runtime>;
 }
 
 parameter_types! {
@@ -305,11 +306,11 @@ impl pallet_scheduler::Config for Runtime {
 }
 /*
 parameter_types! {
-      pub const SessionsPerEra: pallet_plasm_rewards::SessionIndex = 6;
-      pub const BondingDuration: pallet_plasm_rewards::EraIndex = 24 * 28;
+    pub const SessionsPerEra: pallet_plasm_rewards::SessionIndex = 6;
+    pub const BondingDuration: pallet_plasm_rewards::EraIndex = 24 * 28;
 }
-
-
+*/
+/*
 impl pallet_plasm_rewards::Config for Runtime {
     type Currency = Balances;
     type Time = Timestamp;
@@ -321,8 +322,7 @@ impl pallet_plasm_rewards::Config for Runtime {
     type MaybeValidators = PlasmValidator;
     type Event = Event;
 }
-*/
-/*
+
 impl pallet_plasm_validator::Config for Runtime {
     type Currency = Balances;
     type Time = Timestamp;
@@ -362,65 +362,10 @@ impl pallet_plasm_staking_rewards::Config for Runtime {
     type Event = Event;
 }
 
-pub use pallet_staking::StakerStatus;
-
-pallet_staking_reward_curve::build! {
-	const REWARD_CURVE: PiecewiseLinear<'static> = curve!(
-		min_inflation: 0_025_000,
-		max_inflation: 0_100_000,
-		ideal_stake: 0_500_000,
-		falloff: 0_050_000,
-		max_piece_count: 40,
-		test_precision: 0_005_000,
-	);
-}
+pub use pallet_plasm_staking::StakerStatus;
 
 parameter_types! {
-	pub const SessionsPerEra: sp_staking::SessionIndex = 6;
-	pub const BondingDuration: pallet_staking::EraIndex = 24 * 28;
-	pub const SlashDeferDuration: pallet_staking::EraIndex = 24 * 7; // 1/4 the bonding duration.
-	pub const RewardCurve: &'static PiecewiseLinear<'static> = &REWARD_CURVE;
-	pub const MaxNominatorRewardedPerValidator: u32 = 256;
-	pub const ElectionLookahead: BlockNumber = EPOCH_DURATION_IN_BLOCKS / 4;
-	pub const MaxIterations: u32 = 10;
-	// 0.05%. The higher the value, the more strict solution acceptance becomes.
-	pub MinSolutionScoreBump: Perbill = Perbill::from_rational_approximation(5u32, 10_000);
-	pub OffchainSolutionWeightLimit: Weight = RuntimeBlockWeights::get()
-		.get(DispatchClass::Normal)
-		.max_extrinsic.expect("Normal extrinsics have a weight limit configured; qed")
-		.saturating_sub(BlockExecutionWeight::get());
-}
-use pallet_staking::SessionInterface;
-use sp_runtime::curve::PiecewiseLinear;
-
-impl pallet_staking::Config for Runtime {
-	type Currency = Balances;
-	type UnixTime = Timestamp;
-	type CurrencyToVote = frame_support::traits::SaturatingCurrencyToVote;
-	type RewardRemainder = Treasury;
-	type Event = Event;
-	type Slash = Treasury;
-	type Reward = ();
-	type SessionsPerEra = SessionsPerEra;
-	type SlashDeferDuration = SlashDeferDuration;
-	type SlashCancelOrigin = frame_system::EnsureRoot<Self::AccountId>;
-	type BondingDuration = BondingDuration;
-	type SessionInterface = Self;
-	type RewardCurve = RewardCurve;
-	type NextNewSession = Session;
-	type ElectionLookahead = ElectionLookahead;
-	type Call = Call;
-	type MaxIterations = MaxIterations;
-	type MinSolutionScoreBump = MinSolutionScoreBump;
-	type MaxNominatorRewardedPerValidator = MaxNominatorRewardedPerValidator;
-	type UnsignedPriority = EcdsaUnsignedPriority;
-	type OffchainSolutionWeightLimit = OffchainSolutionWeightLimit;
-	type WeightInfo = pallet_staking::weights::SubstrateWeight<Runtime>;
-}
-
-/*
-parameter_types! {
-    pub const SessionsPerEra: pallet_plasm_staking::SessionIndex = 6;
+    pub const SessionsPerEra: sp_staking::SessionIndex = 6;
     pub const BondingDuration: pallet_plasm_staking::EraIndex = 24 * 28;
     pub const SlashDeferDuration: pallet_plasm_staking::EraIndex = 24 * 7; // 1/4 the bonding duration.
     pub const StakingUnsignedPriority: u64 = 1 << 20;
@@ -429,6 +374,10 @@ parameter_types! {
 	pub const MaxIterations: u32 = 10;
 	// 0.05%. The higher the value, the more strict solution acceptance becomes.
 	pub MinSolutionScoreBump: Perbill = Perbill::from_rational_approximation(5u32, 10_000);
+    pub OffchainSolutionWeightLimit: Weight = RuntimeBlockWeights::get()
+		.get(DispatchClass::Normal)
+		.max_extrinsic.expect("Normal extrinsics have a weight limit configured; qed")
+		.saturating_sub(BlockExecutionWeight::get());
 }
 
 impl pallet_plasm_staking::Config for Runtime {
@@ -443,6 +392,7 @@ impl pallet_plasm_staking::Config for Runtime {
     type SlashDeferDuration = SlashDeferDuration;
 	/// A super-majority of the council can cancel the slash.
     type ForSecurityEraReward = StakingRewards;
+    type OffchainSolutionWeightLimit = OffchainSolutionWeightLimit;
 	type SlashCancelOrigin = EnsureRoot<AccountId>;
     type NextNewSession = Session;
 	type ElectionLookahead = ElectionLookahead;
@@ -455,7 +405,7 @@ impl pallet_plasm_staking::Config for Runtime {
     type SessionInterface = Self;
     type Event = Event;
 }
-*/
+
 
 parameter_types! {
 	pub const ProposalBond: Permill = Permill::from_percent(5);
@@ -965,7 +915,7 @@ construct_runtime!(
         Ethereum: pallet_ethereum::{Module, Call, Storage, Event, Config, ValidateUnsigned},
         EVM: pallet_evm::{Module, Call, Storage, Config, Event<T>},
         EthCall: pallet_custom_signatures::{Module, Call, Event<T>, ValidateUnsigned},
-        Staking: pallet_staking::{Module, Call, Storage, Event<T>, Config<T>},
+        Staking: pallet_plasm_staking::{Module, Call, Storage, Event<T>, Config<T>},
         StakingRewards: pallet_plasm_staking_rewards::{Module, Call, Storage, Event<T>, Config},
         Treasury: pallet_treasury::{Module, Call, Storage, Config, Event<T>},
         Bounties: pallet_bounties::{Module, Call, Storage, Event<T>},

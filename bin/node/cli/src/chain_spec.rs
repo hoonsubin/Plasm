@@ -215,8 +215,7 @@ fn make_genesis(
         pallet_plasm_staking_rewards: Some(StakingRewardsConfig {
             ..Default::default()
         }),
-        pallet_staking: Some(StakingConfig {
-			validator_count: initial_authorities.len() as u32 * 2,
+        pallet_plasm_staking: Some(StakingConfig {
 			minimum_validator_count: initial_authorities.len() as u32,
 			stakers: initial_authorities
 				.iter()
