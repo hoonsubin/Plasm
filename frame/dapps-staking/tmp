@@ -1,0 +1,1686 @@
+warning: unused import: `frame_support::dispatch::UnfilteredDispatchable`
+ --> frame/operator/src/lib.rs:3:5
+  |
+3 | use frame_support::dispatch::UnfilteredDispatchable;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `RawOrigin`
+ --> frame/operator/src/lib.rs:5:35
+  |
+5 | use frame_system::{ensure_signed, RawOrigin};
+  |                                   ^^^^^^^^^
+
+warning: 2 warnings emitted
+
+warning: unused import: `num_traits::sign::Unsigned`
+  --> frame/plasm-staking-rewards/src/inflation.rs:10:5
+   |
+10 | use num_traits::sign::Unsigned;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `sp_arithmetic::traits::BaseArithmetic`
+  --> frame/plasm-staking-rewards/src/inflation.rs:11:5
+   |
+11 | use sp_arithmetic::traits::BaseArithmetic;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `sp_std::marker::PhantomData`
+  --> frame/plasm-staking-rewards/src/inflation.rs:12:5
+   |
+12 | use sp_std::marker::PhantomData;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `sp_arithmetic::traits::BaseArithmetic`
+ --> frame/plasm-staking-rewards/src/traits.rs:2:5
+  |
+2 | use sp_arithmetic::traits::BaseArithmetic;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `sp_std::marker::PhantomData`
+ --> frame/plasm-staking-rewards/src/traits.rs:3:5
+  |
+3 | use sp_std::marker::PhantomData;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused variable: `active_era`
+   --> frame/plasm-staking-rewards/src/lib.rs:323:13
+    |
+323 |         let active_era = ActiveEra::mutate(|active_era| {
+    |             ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_active_era`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `start_session`
+   --> frame/plasm-staking-rewards/src/lib.rs:322:18
+    |
+322 |     fn start_era(start_session: SessionIndex) {
+    |                  ^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_start_session`
+
+warning: 7 warnings emitted
+
+warning: unused import: `curve::PiecewiseLinear`
+   --> frame/plasm-staking/src/lib.rs:309:2
+    |
+309 |     curve::PiecewiseLinear,
+    |     ^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: unused variable: `active_era`
+    --> frame/plasm-staking/src/lib.rs:2797:13
+     |
+2797 |     fn end_era(active_era: ActiveEraInfo, _session_index: SessionIndex) {
+     |                ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_active_era`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: 2 warnings emitted
+
+   Compiling pallet-dapps-staking v1.5.0 (/Users/t8m8/projects/stake/Plasm/frame/dapps-staking)
+warning: use of deprecated associated function `frame_system::<impl frame_system::Pallet<T>>::dec_ref`: Use `dec_consumers` instead
+   --> frame/dapps-staking/src/lib.rs:951:9
+    |
+951 |         system::Module::<T>::dec_ref(stash);
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated associated function `frame_system::<impl frame_system::Pallet<T>>::inc_ref`: Use `inc_consumers` instead
+   --> frame/dapps-staking/src/lib.rs:467:13
+    |
+467 |             system::Module::<T>::inc_ref(&stash);
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: 2 warnings emitted
+
+warning: unused imports: `AccountId32`, `IdentifyAccount`, `MultiSignature`, `OpaqueExtrinsic`, `Verify`
+  --> frame/dapps-staking/src/mock.rs:16:74
+   |
+16 |     traits::{BlakeTwo256, ConvertInto, Hash, IdentityLookup, OpaqueKeys, IdentifyAccount, Verify},
+   |                                                                          ^^^^^^^^^^^^^^^  ^^^^^^
+17 |     KeyTypeId, Perbill,
+18 |     MultiSignature, OpaqueExtrinsic,
+   |     ^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^
+19 |     AccountId32
+   |     ^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+error[E0277]: the trait bound `mock::AccountId: EncodeLike` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ the trait `EncodeLike` is not implemented for `mock::AccountId`
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+
+error[E0277]: the trait bound `mock::AccountId: Serialize` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ the trait `Serialize` is not implemented for `mock::AccountId`
+
+error[E0277]: the trait bound `for<'de> mock::AccountId: _::_serde::Deserialize<'de>` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ the trait `for<'de> _::_serde::Deserialize<'de>` is not implemented for `mock::AccountId`
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Display`
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ `mock::AccountId` cannot be formatted with the default formatter
+    |
+    = help: the trait `std::fmt::Display` is not implemented for `mock::AccountId`
+    = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ `mock::AccountId` cannot be formatted using `{:?}`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-system-3.0.0/src/lib.rs:195:74
+    |
+195 |         type AccountId: Parameter + Member + MaybeSerializeDeserialize + Debug + MaybeDisplay + Ord
+    |                                                                          ----- required by this bound in `SysConfig`
+    |
+    = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+    = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+
+error[E0277]: the trait bound `mock::AccountId: std::default::Default` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ the trait `std::default::Default` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-system-3.0.0/src/lib.rs:196:15
+    |
+196 |             + Default;
+    |               ------- required by this bound in `SysConfig`
+
+error[E0277]: the trait bound `mock::AccountId: Ord` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ the trait `Ord` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-system-3.0.0/src/lib.rs:195:97
+    |
+195 |         type AccountId: Parameter + Member + MaybeSerializeDeserialize + Debug + MaybeDisplay + Ord
+    |                                                                                                 --- required by this bound in `SysConfig`
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:137:22
+    |
+137 |     type AccountId = AccountId;
+    |                      ^^^^^^^^^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:134:17
+    |
+134 |     type Call = Call;
+    |                 ^^^^ the trait `Wraps` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-system-3.0.0/src/lib.rs:172:9
+    |
+172 |         type Call: Dispatchable + Debug;
+    |         -------------------------------- required by this bound in `SysConfig`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+
+error[E0271]: type mismatch resolving `<mock::Test as SysConfig>::AccountId == u64`
+   --> frame/dapps-staking/src/mock.rs:182:27
+    |
+182 |     type SessionManager = PlasmRewards;
+    |                           ^^^^^^^^^^^^ expected struct `mock::AccountId`, found `u64`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/pallet-session-3.0.0/src/lib.rs:347:26
+    |
+347 |     type SessionManager: SessionManager<Self::ValidatorId>;
+    |                          --------------------------------- required by this bound in `pallet_session::Config`
+
+error[E0277]: the trait bound `std::option::Option<u64>: From<mock::AccountId>` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:185:26
+    |
+185 |     type ValidatorIdOf = ConvertInto;
+    |                          ^^^^^^^^^^^ the trait `From<mock::AccountId>` is not implemented for `std::option::Option<u64>`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/pallet-session-3.0.0/src/lib.rs:336:25
+    |
+336 |     type ValidatorIdOf: Convert<Self::AccountId, Option<Self::ValidatorId>>;
+    |                         --------------------------------------------------- required by this bound in `pallet_session::Config`
+    |
+    = help: the following implementations were found:
+              <std::option::Option<&'a T> as From<&'a std::option::Option<T>>>
+              <std::option::Option<&'a mut T> as From<&'a mut std::option::Option<T>>>
+              <std::option::Option<T> as From<T>>
+              <std::option::Option<T> as From<subtle::CtOption<T>>>
+    = note: required because of the requirements on the impl of `Convert<mock::AccountId, std::option::Option<u64>>` for `ConvertInto`
+
+error[E0277]: the trait bound `DummyContractAddressFor: ContractAddressFor<H256, mock::AccountId>` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:245:37
+    |
+245 |     type DetermineContractAddress = DummyContractAddressFor;
+    |                                     ^^^^^^^^^^^^^^^^^^^^^^^ the trait `ContractAddressFor<H256, mock::AccountId>` is not implemented for `DummyContractAddressFor`
+    | 
+   ::: /Users/t8m8/projects/stake/Plasm/frame/contracts/src/lib.rs:312:36
+    |
+312 |     type DetermineContractAddress: ContractAddressFor<CodeHash<Self>, Self::AccountId>;
+    |                                    --------------------------------------------------- required by this bound in `pallet_contracts::Config`
+    |
+    = help: the following implementations were found:
+              <DummyContractAddressFor as ContractAddressFor<H256, u64>>
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:272:6
+    |
+272 | impl pallet_plasm_rewards::Config for Test {
+    |      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Wraps` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `pallet_plasm_rewards::ComputeEraWithParam<u32>` for `Module<mock::Test>`
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:287:27
+    |
+287 |     type ContractFinder = Operator;
+    |                           ^^^^^^^^ the trait `Wraps` is not implemented for `mock::AccountId`
+    | 
+   ::: frame/dapps-staking/src/lib.rs:205:11
+    |
+205 | pub trait Config: pallet_session::Config {
+    |           ------ required by a bound in this
+...
+210 |     type ContractFinder: ContractFinder<Self::AccountId, parameters::StakingParameters>;
+    |                          -------------------------------------------------------------- required by this bound in `Config`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `ContractFinder<mock::AccountId, StakingParameters>` for `pallet_contract_operator::Module<mock::Test>`
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+    --> frame/dapps-staking/src/mock.rs:58:1
+     |
+58   | / impl_outer_origin! {
+59   | |     pub enum Origin for Test where system = frame_system {}
+60   | | }
+     | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1731:5
+     |
+1731 |       type Call;
+     |       ---------- required by this bound in `OriginTrait`
+     |
+     = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+     = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+     = note: required because it appears within the type `mock::Call`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+    --> frame/dapps-staking/src/mock.rs:58:1
+     |
+58   | / impl_outer_origin! {
+59   | |     pub enum Origin for Test where system = frame_system {}
+60   | | }
+     | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1731:5
+     |
+1731 |       type Call;
+     |       ---------- required by this bound in `OriginTrait`
+     |
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: required because it appears within the type `mock::Call`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+    --> frame/dapps-staking/src/mock.rs:58:1
+     |
+58   | / impl_outer_origin! {
+59   | |     pub enum Origin for Test where system = frame_system {}
+60   | | }
+     | |_^ no implementation for `mock::AccountId == mock::AccountId`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1731:5
+     |
+1731 |       type Call;
+     |       ---------- required by this bound in `OriginTrait`
+     |
+     = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: required because it appears within the type `mock::Call`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+    --> frame/dapps-staking/src/mock.rs:58:1
+     |
+58   | / impl_outer_origin! {
+59   | |     pub enum Origin for Test where system = frame_system {}
+60   | | }
+     | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1731:5
+     |
+1731 |       type Call;
+     |       ---------- required by this bound in `OriginTrait`
+     |
+     = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+     = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: required because it appears within the type `mock::Call`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+    --> frame/dapps-staking/src/mock.rs:58:1
+     |
+58   | / impl_outer_origin! {
+59   | |     pub enum Origin for Test where system = frame_system {}
+60   | | }
+     | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1731:5
+     |
+1731 |       type Call;
+     |       ---------- required by this bound in `OriginTrait`
+     |
+     = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+     = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: required because it appears within the type `mock::Call`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+    --> frame/dapps-staking/src/mock.rs:58:1
+     |
+58   | / impl_outer_origin! {
+59   | |     pub enum Origin for Test where system = frame_system {}
+60   | | }
+     | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1731:5
+     |
+1731 |       type Call;
+     |       ---------- required by this bound in `OriginTrait`
+     |
+     = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+     = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: required because it appears within the type `mock::Call`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/sp-runtime-3.0.0/src/traits.rs:715:5
+    |
+715 |       type Config;
+    |       ------------ required by this bound in `Dispatchable`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/sp-runtime-3.0.0/src/traits.rs:715:5
+    |
+715 |       type Config;
+    |       ------------ required by this bound in `Dispatchable`
+    |
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ no implementation for `mock::AccountId == mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/sp-runtime-3.0.0/src/traits.rs:715:5
+    |
+715 |       type Config;
+    |       ------------ required by this bound in `Dispatchable`
+    |
+    = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/sp-runtime-3.0.0/src/traits.rs:715:5
+    |
+715 |       type Config;
+    |       ------------ required by this bound in `Dispatchable`
+    |
+    = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+    = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/sp-runtime-3.0.0/src/traits.rs:715:5
+    |
+715 |       type Config;
+    |       ------------ required by this bound in `Dispatchable`
+    |
+    = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/sp-runtime-3.0.0/src/traits.rs:715:5
+    |
+715 |       type Config;
+    |       ------------ required by this bound in `Dispatchable`
+    |
+    = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ no implementation for `mock::AccountId == mock::AccountId`
+    |
+    = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+    |
+    = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+    = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `Module<mock::Test>`
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+    --> frame/dapps-staking/src/mock.rs:62:1
+     |
+62   | / impl_outer_dispatch! {
+63   | |     pub enum Call for Test where origin: Origin {
+64   | |         pallet_session::Session,
+65   | |         pallet_balances::Balances,
+...    |
+68   | |     }
+69   | | }
+     | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1932:21
+     |
+1932 |   pub trait IsSubType<T> {
+     |                       - required by this bound in `IsSubType`
+     |
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+    --> frame/dapps-staking/src/mock.rs:62:1
+     |
+62   | / impl_outer_dispatch! {
+63   | |     pub enum Call for Test where origin: Origin {
+64   | |         pallet_session::Session,
+65   | |         pallet_balances::Balances,
+...    |
+68   | |     }
+69   | | }
+     | |_^ no implementation for `mock::AccountId == mock::AccountId`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1932:21
+     |
+1932 |   pub trait IsSubType<T> {
+     |                       - required by this bound in `IsSubType`
+     |
+     = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+    --> frame/dapps-staking/src/mock.rs:62:1
+     |
+62   | / impl_outer_dispatch! {
+63   | |     pub enum Call for Test where origin: Origin {
+64   | |         pallet_session::Session,
+65   | |         pallet_balances::Balances,
+...    |
+68   | |     }
+69   | | }
+     | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1932:21
+     |
+1932 |   pub trait IsSubType<T> {
+     |                       - required by this bound in `IsSubType`
+     |
+     = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+     = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+    --> frame/dapps-staking/src/mock.rs:62:1
+     |
+62   | / impl_outer_dispatch! {
+63   | |     pub enum Call for Test where origin: Origin {
+64   | |         pallet_session::Session,
+65   | |         pallet_balances::Balances,
+...    |
+68   | |     }
+69   | | }
+     | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1932:21
+     |
+1932 |   pub trait IsSubType<T> {
+     |                       - required by this bound in `IsSubType`
+     |
+     = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+     = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+    --> frame/dapps-staking/src/mock.rs:62:1
+     |
+62   | / impl_outer_dispatch! {
+63   | |     pub enum Call for Test where origin: Origin {
+64   | |         pallet_session::Session,
+65   | |         pallet_balances::Balances,
+...    |
+68   | |     }
+69   | | }
+     | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+     | 
+    ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/frame-support-3.0.0/src/traits.rs:1932:21
+     |
+1932 |   pub trait IsSubType<T> {
+     |                       - required by this bound in `IsSubType`
+     |
+     = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+     = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+     = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+     = note: required because it appears within the type `Call<mock::Test>`
+     = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `Module<mock::Test>`
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ no implementation for `mock::AccountId == mock::AccountId`
+    |
+    = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+    |
+    = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+    = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: no field of an enum variant may have a dynamically sized type
+   = help: change the field's type to have a statically known size
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+help: borrowed types always have a statically known size
+   |
+198|                 $camelcase ( &$crate::dispatch::CallableCallFor<$camelcase, $runtime> )
+   |                              ^
+help: the `Box` type always has a statically known size and allocates its contents in the heap
+   |
+198|                 $camelcase ( Box<$crate::dispatch::CallableCallFor<$camelcase, $runtime>> )
+   |                              ^^^^                                                       ^
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ no implementation for `mock::AccountId == mock::AccountId`
+   |
+   = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: no field of an enum variant may have a dynamically sized type
+   = help: change the field's type to have a statically known size
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+help: borrowed types always have a statically known size
+   |
+198|                 $camelcase ( &$crate::dispatch::CallableCallFor<$camelcase, $runtime> )
+   |                              ^
+help: the `Box` type always has a statically known size and allocates its contents in the heap
+   |
+198|                 $camelcase ( Box<$crate::dispatch::CallableCallFor<$camelcase, $runtime>> )
+   |                              ^^^^                                                       ^
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+   |
+   = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+   = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: no field of an enum variant may have a dynamically sized type
+   = help: change the field's type to have a statically known size
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+help: borrowed types always have a statically known size
+   |
+198|                 $camelcase ( &$crate::dispatch::CallableCallFor<$camelcase, $runtime> )
+   |                              ^
+help: the `Box` type always has a statically known size and allocates its contents in the heap
+   |
+198|                 $camelcase ( Box<$crate::dispatch::CallableCallFor<$camelcase, $runtime>> )
+   |                              ^^^^                                                       ^
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: no field of an enum variant may have a dynamically sized type
+   = help: change the field's type to have a statically known size
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+help: borrowed types always have a statically known size
+   |
+198|                 $camelcase ( &$crate::dispatch::CallableCallFor<$camelcase, $runtime> )
+   |                              ^
+help: the `Box` type always has a statically known size and allocates its contents in the heap
+   |
+198|                 $camelcase ( Box<$crate::dispatch::CallableCallFor<$camelcase, $runtime>> )
+   |                              ^^^^                                                       ^
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: no field of an enum variant may have a dynamically sized type
+   = help: change the field's type to have a statically known size
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+help: borrowed types always have a statically known size
+   |
+198|                 $camelcase ( &$crate::dispatch::CallableCallFor<$camelcase, $runtime> )
+   |                              ^
+help: the `Box` type always has a statically known size and allocates its contents in the heap
+   |
+198|                 $camelcase ( Box<$crate::dispatch::CallableCallFor<$camelcase, $runtime>> )
+   |                              ^^^^                                                       ^
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/codec.rs:270:19
+    |
+270 |   pub trait Decode: Sized {
+    |                     ----- required by this bound in `Decode`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/codec.rs:270:19
+    |
+270 |   pub trait Decode: Sized {
+    |                     ----- required by this bound in `Decode`
+    |
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ no implementation for `mock::AccountId == mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/codec.rs:270:19
+    |
+270 |   pub trait Decode: Sized {
+    |                     ----- required by this bound in `Decode`
+    |
+    = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/codec.rs:270:19
+    |
+270 |   pub trait Decode: Sized {
+    |                     ----- required by this bound in `Decode`
+    |
+    = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+    = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/codec.rs:270:19
+    |
+270 |   pub trait Decode: Sized {
+    |                     ----- required by this bound in `Decode`
+    |
+    = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/codec.rs:270:19
+    |
+270 |   pub trait Decode: Sized {
+    |                     ----- required by this bound in `Decode`
+    |
+    = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   | 
+  ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/encode_like.rs:73:41
+   |
+73 |   pub trait EncodeLike<T: Encode = Self>: Sized + Encode {}
+   |                                           ----- required by this bound in `EncodeLike`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+   = note: required because it appears within the type `mock::Call`
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+   | 
+  ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/encode_like.rs:73:41
+   |
+73 |   pub trait EncodeLike<T: Encode = Self>: Sized + Encode {}
+   |                                           ----- required by this bound in `EncodeLike`
+   |
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: required because it appears within the type `mock::Call`
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ no implementation for `mock::AccountId == mock::AccountId`
+   | 
+  ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/encode_like.rs:73:41
+   |
+73 |   pub trait EncodeLike<T: Encode = Self>: Sized + Encode {}
+   |                                           ----- required by this bound in `EncodeLike`
+   |
+   = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: required because it appears within the type `mock::Call`
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+   | 
+  ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/encode_like.rs:73:41
+   |
+73 |   pub trait EncodeLike<T: Encode = Self>: Sized + Encode {}
+   |                                           ----- required by this bound in `EncodeLike`
+   |
+   = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+   = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: required because it appears within the type `mock::Call`
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+   | 
+  ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/encode_like.rs:73:41
+   |
+73 |   pub trait EncodeLike<T: Encode = Self>: Sized + Encode {}
+   |                                           ----- required by this bound in `EncodeLike`
+   |
+   = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: required because it appears within the type `mock::Call`
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+   | 
+  ::: /Users/t8m8/.cargo/registry/src/github.com-1ecc6299db9ec823/parity-scale-codec-2.0.1/src/encode_like.rs:73:41
+   |
+73 |   pub trait EncodeLike<T: Encode = Self>: Sized + Encode {}
+   |                                           ----- required by this bound in `EncodeLike`
+   |
+   = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+   = note: required because it appears within the type `Call<mock::Test>`
+   = note: required because it appears within the type `mock::Call`
+   = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ no implementation for `mock::AccountId == mock::AccountId`
+    |
+    = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+    |
+    = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+    = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:277:5
+    |
+277 |       type ComputeEraForDapps = DappsStaking;
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Wraps` is not implemented for `mock::AccountId`
+    | 
+   ::: frame/dapps-staking/src/lib.rs:407:1
+    |
+407 | / decl_module! {
+408 | |     pub struct Module<T: Config> for enum Call
+    | |                ------ required by a bound in this
+409 | |     where
+410 | |         origin: T::Origin,
+...   |
+909 | |     }
+910 | | }
+    | |_- required by this bound in `Module`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:278:5
+    |
+278 |       type ComputeEraForSecurity = DappsStaking;
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Wraps` is not implemented for `mock::AccountId`
+    | 
+   ::: frame/dapps-staking/src/lib.rs:407:1
+    |
+407 | / decl_module! {
+408 | |     pub struct Module<T: Config> for enum Call
+    | |                ------ required by a bound in this
+409 | |     where
+410 | |         origin: T::Origin,
+...   |
+909 | |     }
+910 | | }
+    | |_- required by this bound in `Module`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:287:5
+    |
+287 |       type ContractFinder = Operator;
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Wraps` is not implemented for `mock::AccountId`
+    | 
+   ::: /Users/t8m8/projects/stake/Plasm/frame/operator/src/lib.rs:94:1
+    |
+94  | / decl_module! {
+95  | |     pub struct Module<T: Config> for enum Call
+96  | |     where
+97  | |         origin: T::Origin,
+...   |
+174 | |     }
+175 | | }
+    | |_- required by this bound in `pallet_contract_operator::Module`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `Module<mock::Test>`
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+  --> frame/dapps-staking/src/mock.rs:62:1
+   |
+62 | / impl_outer_dispatch! {
+63 | |     pub enum Call for Test where origin: Origin {
+64 | |         pallet_session::Session,
+65 | |         pallet_balances::Balances,
+...  |
+68 | |     }
+69 | | }
+   | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+   |
+   = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+   = note: required because of the requirements on the impl of `Callable<mock::Test>` for `Module<mock::Test>`
+   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: Wraps` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `Wraps` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `UncheckedFrom<H256>` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Callable<mock::Test>` for `pallet_contracts::Module<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: std::clone::Clone` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `std::clone::Clone` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: can't compare `mock::AccountId` with `mock::AccountId`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ no implementation for `mock::AccountId == mock::AccountId`
+    |
+    = help: the trait `std::cmp::PartialEq` is not implemented for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: `mock::AccountId` doesn't implement `std::fmt::Debug`
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ `mock::AccountId` cannot be formatted using `{:?}`
+    |
+    = help: the trait `std::fmt::Debug` is not implemented for `mock::AccountId`
+    = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeEncode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeEncode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `_::_parity_scale_codec::Encode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0277]: the trait bound `mock::AccountId: WrapperTypeDecode` is not satisfied
+   --> frame/dapps-staking/src/mock.rs:62:1
+    |
+62  | / impl_outer_dispatch! {
+63  | |     pub enum Call for Test where origin: Origin {
+64  | |         pallet_session::Session,
+65  | |         pallet_balances::Balances,
+...   |
+68  | |     }
+69  | | }
+    | |_^ the trait `WrapperTypeDecode` is not implemented for `mock::AccountId`
+    |
+    = note: required because of the requirements on the impl of `Decode` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `Codec` for `mock::AccountId`
+    = note: required because of the requirements on the impl of `StaticLookup` for `IdentityLookup<mock::AccountId>`
+    = note: required because it appears within the type `Call<mock::Test>`
+    = note: required because it appears within the type `mock::Call`
+    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: aborting due to 85 previous errors; 1 warning emitted
+
+Some errors have detailed explanations: E0271, E0277.
+For more information about an error, try `rustc --explain E0271`.
+error: could not compile `pallet-dapps-staking`
+
+To learn more, run the command again with --verbose.
