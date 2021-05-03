@@ -13,7 +13,10 @@ use frame_support::{
         DispatchClass, IdentityFee, Weight,
     },
 };
-use frame_system::limits::{BlockLength, BlockWeights};
+use frame_system::{
+	EnsureRoot, EnsureOneOf,
+	limits::{BlockWeights, BlockLength}
+};
 use pallet_contracts::weights::WeightInfo;
 use pallet_evm::{
     Account as EVMAccount, EnsureAddressRoot, EnsureAddressTruncated, FeeCalculator,
@@ -30,7 +33,12 @@ use plasm_primitives::{
     AccountId, AccountIndex, Balance, BlockNumber, Hash, Index, Moment, Signature,
 };
 use sp_api::impl_runtime_apis;
-use sp_core::{crypto::KeyTypeId, OpaqueMetadata, H160, H256, U256};
+use sp_core::{
+    crypto::KeyTypeId,
+    u32_trait::{_1, _2, _3, _4, _5},
+    OpaqueMetadata,
+    H160, H256, U256
+};
 use sp_inherents::{CheckInherentsResult, InherentData};
 use sp_runtime::traits::{
     BlakeTwo256, Block as BlockT, ConvertInto, Extrinsic, NumberFor, OpaqueKeys,
@@ -40,8 +48,8 @@ use sp_runtime::transaction_validity::{
     TransactionPriority, TransactionSource, TransactionValidity,
 };
 use sp_runtime::{
-    create_runtime_str, generic, impl_opaque_keys, ApplyExtrinsicResult, FixedPointNumber, Perbill,
-    Perquintill, RuntimeAppPublic,
+    create_runtime_str, generic, impl_opaque_keys, ApplyExtrinsicResult, FixedPointNumber, Perbill, Permill,
+    Perquintill, RuntimeAppPublic, ModuleId, Percent,
 };
 use sp_std::convert::TryFrom;
 use sp_std::prelude::*;
@@ -61,6 +69,15 @@ use constants::{currency::*, time::*};
 // Make the WASM binary available.
 #[cfg(feature = "std")]
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
+
+/// Wasm binary unwrapped. If built with `SKIP_WASM_BUILD`, the function panics.
+#[cfg(feature = "std")]
+pub fn wasm_binary_unwrap() -> &'static [u8] {
+	WASM_BINARY.expect("Development wasm binary is not available. This means the client is \
+						built with `SKIP_WASM_BUILD` flag and it is only usable for \
+						production chains. Please rebuild with the flag disabled.")
+}
+
 
 /// Runtime version.
 pub const VERSION: RuntimeVersion = RuntimeVersion {
@@ -242,9 +259,10 @@ impl pallet_authorship::Config for Runtime {
 
 impl_opaque_keys! {
     pub struct SessionKeys {
-        pub babe: Babe,
         pub grandpa: Grandpa,
+        pub babe: Babe,
         pub im_online: ImOnline,
+        pub authority_discovery: AuthorityDiscovery,
     }
 }
 
@@ -253,7 +271,7 @@ parameter_types! {
 }
 
 impl pallet_session::Config for Runtime {
-    type SessionManager = PlasmRewards;
+    type SessionManager = StakingRewards;
     type SessionHandler = <SessionKeys as OpaqueKeys>::KeyTypeIdProviders;
     type ShouldEndSession = Babe;
     type NextSessionRotation = Babe;
@@ -266,8 +284,8 @@ impl pallet_session::Config for Runtime {
 }
 
 impl pallet_session::historical::Config for Runtime {
-    type FullIdentification = ();
-    type FullIdentificationOf = ();
+	type FullIdentification = pallet_plasm_staking::Exposure<AccountId, Balance>;
+	type FullIdentificationOf = pallet_plasm_staking::ExposureOf<Runtime>;
 }
 
 parameter_types! {
@@ -286,12 +304,13 @@ impl pallet_scheduler::Config for Runtime {
     type MaxScheduledPerBlock = MaxScheduledPerBlock;
     type WeightInfo = ();
 }
-
+/*
 parameter_types! {
     pub const SessionsPerEra: pallet_plasm_rewards::SessionIndex = 6;
     pub const BondingDuration: pallet_plasm_rewards::EraIndex = 24 * 28;
 }
-
+*/
+/*
 impl pallet_plasm_rewards::Config for Runtime {
     type Currency = Balances;
     type Time = Timestamp;
@@ -315,6 +334,10 @@ impl pallet_plasm_validator::Config for Runtime {
     type ComputeEra = PlasmValidator;
     type Event = Event;
 }
+*/
+
+// Staking module impls
+
 
 /*
 impl pallet_dapps_staking::Config for Runtime {
@@ -331,6 +354,179 @@ impl pallet_dapps_staking::Config for Runtime {
     type Event = Event;
 }
 */
+
+impl pallet_plasm_staking_rewards::Config for Runtime {
+    type Currency = Balances;
+    type UnixTime = Timestamp;
+    type SessionsPerEra = SessionsPerEra;
+    type Event = Event;
+}
+
+pub use pallet_plasm_staking::StakerStatus;
+
+parameter_types! {
+    pub const SessionsPerEra: sp_staking::SessionIndex = 6;
+    pub const BondingDuration: pallet_plasm_staking::EraIndex = 24 * 28;
+    pub const SlashDeferDuration: pallet_plasm_staking::EraIndex = 24 * 7; // 1/4 the bonding duration.
+    pub const StakingUnsignedPriority: u64 = 1 << 20;
+	pub const MaxNominatorRewardedPerValidator: u32 = 256;
+	pub const ElectionLookahead: BlockNumber = EPOCH_DURATION_IN_BLOCKS / 4;
+	pub const MaxIterations: u32 = 10;
+	// 0.05%. The higher the value, the more strict solution acceptance becomes.
+	pub MinSolutionScoreBump: Perbill = Perbill::from_rational_approximation(5u32, 10_000);
+    pub OffchainSolutionWeightLimit: Weight = RuntimeBlockWeights::get()
+		.get(DispatchClass::Normal)
+		.max_extrinsic.expect("Normal extrinsics have a weight limit configured; qed")
+		.saturating_sub(BlockExecutionWeight::get());
+}
+
+impl pallet_plasm_staking::Config for Runtime {
+    type Currency = Balances;
+    type UnixTime = Timestamp;
+    type CurrencyToVote = U128CurrencyToVote;
+    type RewardRemainder = Treasury; 
+    type Slash = Treasury; // send the slashed funds to the treasury.
+	type Reward = (); // rewards are minted from the void
+    type SessionsPerEra = SessionsPerEra;
+    type BondingDuration = BondingDuration;
+    type SlashDeferDuration = SlashDeferDuration;
+	/// A super-majority of the council can cancel the slash.
+    type ForSecurityEraReward = StakingRewards;
+    type OffchainSolutionWeightLimit = OffchainSolutionWeightLimit;
+	type SlashCancelOrigin = EnsureRoot<AccountId>;
+    type NextNewSession = Session;
+	type ElectionLookahead = ElectionLookahead;
+	type Call = Call;
+	type MaxIterations = MaxIterations;
+	type MinSolutionScoreBump = MinSolutionScoreBump;
+	type MaxNominatorRewardedPerValidator = MaxNominatorRewardedPerValidator;
+	type UnsignedPriority = StakingUnsignedPriority;
+	type WeightInfo = pallet_plasm_staking::weights::SubstrateWeight<Runtime>;
+    type SessionInterface = Self;
+    type Event = Event;
+}
+
+
+parameter_types! {
+	pub const ProposalBond: Permill = Permill::from_percent(5);
+	pub const ProposalBondMinimum: u64 = 1;
+	pub const SpendPeriod: u32 = 2;
+	pub const Burn: Permill = Permill::from_percent(50);
+	pub const TipCountdown: u32 = 1;
+	pub const TipFindersFee: Percent = Percent::from_percent(20);
+	pub const TipReportDepositBase: u64 = 1;
+	pub const DataDepositPerByte: u64 = 1;
+	pub const BountyDepositBase: u64 = 80;
+	pub const BountyDepositPayoutDelay: u32 = 3;
+	pub const TreasuryModuleId: ModuleId = ModuleId(*b"py/trsry");
+	pub const BountyUpdatePeriod: u32 = 20;
+	pub const MaximumReasonLength: u32 = 16384;
+	pub const BountyCuratorDeposit: Permill = Permill::from_percent(50);
+	pub const BountyValueMinimum: u64 = 1;
+}
+
+impl pallet_treasury::Config for Runtime {
+	type ModuleId = TreasuryModuleId;
+	type Currency = Balances;
+	type ApproveOrigin = EnsureOneOf<
+		AccountId,
+		EnsureRoot<AccountId>,
+		pallet_collective::EnsureProportionAtLeast<_3, _5, AccountId, CouncilCollective>
+	>;
+	type RejectOrigin = EnsureOneOf<
+		AccountId,
+		EnsureRoot<AccountId>,
+		pallet_collective::EnsureProportionMoreThan<_1, _2, AccountId, CouncilCollective>
+	>;
+	type Event = Event;
+	type OnSlash = ();
+	type ProposalBond = ProposalBond;
+	type ProposalBondMinimum = ProposalBondMinimum;
+	type SpendPeriod = SpendPeriod;
+	type Burn = Burn;
+	type BurnDestination = ();
+	type SpendFunds = Bounties;
+	type WeightInfo = pallet_treasury::weights::SubstrateWeight<Runtime>;
+}
+
+impl pallet_bounties::Config for Runtime {
+	type Event = Event;
+	type BountyDepositBase = BountyDepositBase;
+	type BountyDepositPayoutDelay = BountyDepositPayoutDelay;
+	type BountyUpdatePeriod = BountyUpdatePeriod;
+	type BountyCuratorDeposit = BountyCuratorDeposit;
+	type BountyValueMinimum = BountyValueMinimum;
+	type DataDepositPerByte = DataDepositPerByte;
+	type MaximumReasonLength = MaximumReasonLength;
+	type WeightInfo = pallet_bounties::weights::SubstrateWeight<Runtime>;
+}
+
+impl pallet_tips::Config for Runtime {
+	type Event = Event;
+	type DataDepositPerByte = DataDepositPerByte;
+	type MaximumReasonLength = MaximumReasonLength;
+	type Tippers = Elections;
+	type TipCountdown = TipCountdown;
+	type TipFindersFee = TipFindersFee;
+	type TipReportDepositBase = TipReportDepositBase;
+	type WeightInfo = pallet_tips::weights::SubstrateWeight<Runtime>;
+}
+
+use frame_support::traits::{LockIdentifier, U128CurrencyToVote};
+
+parameter_types! {
+	pub const CandidacyBond: Balance = 10 * PLM_100;
+	pub const VotingBond: Balance = PLM_100;
+	pub const TermDuration: BlockNumber = 7 * DAYS;
+    // 1 storage item created, key size is 32 bytes, value size is 16+16.
+    pub const VotingBondBase: Balance = deposit(1, 64);
+    // additional data per vote is 32 bytes (account id).
+    pub const VotingBondFactor: Balance = deposit(0, 32);
+	pub const DesiredMembers: u32 = 13;
+	pub const DesiredRunnersUp: u32 = 7;
+	pub const ElectionsPhragmenModuleId: LockIdentifier = *b"phrelect";
+}
+
+impl pallet_elections_phragmen::Config for Runtime {
+	type Event = Event;
+	type ModuleId = ElectionsPhragmenModuleId;
+	type Currency = Balances;
+	type ChangeMembers = Council;
+	// NOTE: this implies that council's genesis members cannot be set directly and must come from
+	// this module.
+	type InitializeMembers = Council;
+	type CurrencyToVote = U128CurrencyToVote;
+	type CandidacyBond = CandidacyBond;
+	type VotingBondBase = VotingBondBase;
+	type VotingBondFactor = VotingBondFactor;
+	type LoserCandidate = ();
+	type KickedMember = ();
+	type DesiredMembers = DesiredMembers;
+	type DesiredRunnersUp = DesiredRunnersUp;
+	type TermDuration = TermDuration;
+	type WeightInfo = pallet_elections_phragmen::weights::SubstrateWeight<Runtime>;
+}
+
+parameter_types! {
+	pub const CouncilMotionDuration: BlockNumber = 5 * DAYS;
+	pub const CouncilMaxProposals: u32 = 100;
+	pub const ProposalVotesRequired: u32 = 3;
+	pub const ProposalMininumDeposit: Balance = 0;
+}
+
+type CouncilCollective = pallet_collective::Instance1;
+impl pallet_collective::Config<CouncilCollective> for Runtime {
+	type Origin = Origin;
+	type Proposal = Call;
+	type Event = Event;
+	type MotionDuration = CouncilMotionDuration;
+	type MaxProposals = CouncilMaxProposals;
+	type MaxMembers = ();
+	type DefaultVote = pallet_collective::PrimeDefaultVote;
+	type WeightInfo = ();
+}
+
+impl pallet_authority_discovery::Config for Runtime {}
 
 parameter_types! {
     pub const TombstoneDeposit: Balance = deposit(
@@ -701,8 +897,8 @@ construct_runtime!(
         Balances: pallet_balances::{Module, Call, Storage, Event<T>, Config<T>},
         Contracts: pallet_contracts::{Module, Call, Storage, Event<T>, Config<T>},
         //DappsStaking: pallet_dapps_staking::{Module, Call, Storage, Event<T>},
-        PlasmValidator: pallet_plasm_validator::{Module, Call, Storage, Event<T>, Config<T>},
-        PlasmRewards: pallet_plasm_rewards::{Module, Call, Storage, Event<T>, Config},
+        //PlasmValidator: pallet_plasm_validator::{Module, Call, Storage, Event<T>, Config<T>},
+        //PlasmRewards: pallet_plasm_rewards::{Module, Call, Storage, Event<T>, Config},
         Session: pallet_session::{Module, Call, Storage, Event, Config<T>},
         Historical: pallet_session_historical::{Module},
         Babe: pallet_babe::{Module, Call, Storage, Config, Inherent, ValidateUnsigned},
@@ -719,6 +915,14 @@ construct_runtime!(
         Ethereum: pallet_ethereum::{Module, Call, Storage, Event, Config, ValidateUnsigned},
         EVM: pallet_evm::{Module, Call, Storage, Config, Event<T>},
         EthCall: pallet_custom_signatures::{Module, Call, Event<T>, ValidateUnsigned},
+        Staking: pallet_plasm_staking::{Module, Call, Storage, Event<T>, Config<T>},
+        StakingRewards: pallet_plasm_staking_rewards::{Module, Call, Storage, Event<T>, Config},
+        Treasury: pallet_treasury::{Module, Call, Storage, Config, Event<T>},
+        Bounties: pallet_bounties::{Module, Call, Storage, Event<T>},
+		Tips: pallet_tips::{Module, Call, Storage, Event<T>},
+        Elections: pallet_elections_phragmen::{Module, Call, Storage, Event<T>},
+		Council: pallet_collective::<Instance1>::{Module, Call, Storage, Origin<T>, Event<T>, Config<T>},
+		AuthorityDiscovery: pallet_authority_discovery::{Module, Call},
     }
 );
 

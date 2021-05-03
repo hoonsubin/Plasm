@@ -9,6 +9,8 @@ members = [
     "frame/plasm-support",
     "frame/plasm-validator",
     "frame/custom-signatures",
+    "frame/plasm-staking",
+    "frame/plasm-staking-rewards"
 ]
 
 exclude = [

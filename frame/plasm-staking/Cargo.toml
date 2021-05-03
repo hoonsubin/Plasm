@@ -1,0 +1,85 @@
+[dependencies.codec]
+default-features = false
+features = ["derive"]
+package = "parity-scale-codec"
+version = "2.0.0"
+
+[dependencies.frame-benchmarking]
+default-features = false
+optional = true
+version = "3.0.0"
+
+[dependencies.frame-support]
+default-features = false
+version = "3.0.0"
+
+[dependencies.frame-system]
+default-features = false
+version = "3.0.0"
+
+[dependencies.pallet-authorship]
+default-features = false
+version = "3.0.0"
+
+[dependencies.pallet-session]
+default-features = false
+features = ["historical"]
+version = "3.0.0"
+
+[dependencies.rand_chacha]
+default-features = false
+optional = true
+version = "0.2"
+
+[dependencies.serde]
+optional = true
+version = "1.0.101"
+
+[dependencies.sp-application-crypto]
+default-features = false
+version = "3.0.0"
+
+[dependencies.sp-io]
+default-features = false
+version = "3.0.0"
+
+[dependencies.sp-npos-elections]
+default-features = false
+version = "3.0.0"
+
+[dependencies.sp-runtime]
+default-features = false
+version = "3.0.0"
+
+[dependencies.sp-staking]
+default-features = false
+version = "3.0.0"
+
+[dependencies.sp-std]
+default-features = false
+version = "3.0.0"
+
+[dependencies.static_assertions]
+version = "1.1.0"
+
+[dependencies.pallet-plasm-staking-rewards]
+default-features = false 
+path = "../plasm-staking-rewards"
+
+[features]
+default = ["std"]
+runtime-benchmarks = ["frame-benchmarking", "rand_chacha"]
+std = ["serde", "codec/std", "sp-std/std", "sp-npos-elections/std", "sp-io/std", "frame-support/std", "sp-runtime/std", "sp-staking/std", "pallet-session/std", "frame-system/std", "pallet-authorship/std", "sp-application-crypto/std"]
+
+[package]
+authors = ["Parity Technologies <admin@parity.io>"]
+description = "FRAME pallet staking"
+edition = "2018"
+homepage = "https://substrate.dev"
+license = "Apache-2.0"
+name = "pallet-plasm-staking"
+readme = "README.md"
+repository = "https://github.com/paritytech/substrate/"
+version = "3.0.0"
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
